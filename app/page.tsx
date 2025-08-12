@@ -7,9 +7,9 @@ import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
 import { TypewriterEffect } from "@/components/effects/typewriter-effect"
 import { TextEffect } from "@/components/motion-primitives/text-effect"
-import dynamic from "next/dynamic"
-import { LatestListSkeleton } from "@/components/latest-list"
+import { LatestList } from "@/components/latest-list"
 import { AppShell } from "@/components/app-sidebar"
+import { useEffect, useState } from "react"
 
 const features = [
   {
@@ -35,12 +35,54 @@ const features = [
   },
 ]
 
-const DynamicLatestList = dynamic(() => import("@/components/latest-list"), {
-  ssr: false,
-  loading: () => <LatestListSkeleton />,
-})
-
 export default function Page() {
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) {
+    return (
+      <AppShell>
+        <div className="space-y-16">
+          <section className="relative text-center py-20">
+            <div className="container mx-auto px-4">
+              <Badge variant="outline" className="mb-4 border-primary/20 text-primary bg-primary/10">
+                <SparklesIcon className="h-4 w-4 mr-2 text-primary" />
+                YOUR #1 LEARNING PARTNER
+              </Badge>
+              <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
+                <div className="block">Analyse</div>
+                <div className="block">Research</div>
+                <div className="block">with Confidence!</div>
+              </h1>
+              <p className="mt-6 max-w-2xl mx-auto text-lg text-slate-600 dark:text-slate-300">
+                Maximize your Research Skills.
+              </p>
+              <div className="mt-8 flex justify-center">
+                <Button
+                  size="lg"
+                  className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-8 py-3 font-bold"
+                  asChild
+                >
+                  <Link href="/upload" aria-label="Go to Upload and Analyze Papers">
+                    Get Started
+                  </Link>
+                </Button>
+              </div>
+            </div>
+          </section>
+          <section className="space-y-6">
+            <h2 className="text-3xl font-bold text-center">Powerful Research Tools</h2>
+            <CardHoverEffect items={features} />
+          </section>
+          <LatestList />
+        </div>
+      </AppShell>
+    )
+  }
+
   return (
     <AppShell>
       <div className="space-y-16">
@@ -92,7 +134,8 @@ export default function Page() {
           <CardHoverEffect items={features} />
         </section>
 
-        <DynamicLatestList />
+        {/* Latest List Section */}
+        <LatestList />
       </div>
     </AppShell>
   )

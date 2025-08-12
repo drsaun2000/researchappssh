@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
 import { CheckCircle2, AlertTriangle, Copy, X, FileDown } from "lucide-react"
-import { Variants, Transition } from 'motion/react'
+import type { Variants, Transition } from "@/components/motion-wrapper"
 import type { Paper } from "@/lib/types"
 
 interface AnalysisResultModalProps {
@@ -37,7 +37,7 @@ export default function AnalysisResultModal({ paper, open, onClose }: AnalysisRe
   }
 
   const customTransition: Transition = {
-    type: 'spring',
+    type: "spring",
     bounce: 0,
     duration: 0.25,
   }

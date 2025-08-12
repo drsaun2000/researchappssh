@@ -22,7 +22,7 @@ export function LatestListSkeleton() {
   )
 }
 
-export default function LatestList() {
+export function LatestList() {
   const { papers } = useLibrary()
   const [isClient, setIsClient] = useState(false)
 
@@ -54,3 +54,5 @@ export default function LatestList() {
     </section>
   )
 }
+
+export default LatestList
