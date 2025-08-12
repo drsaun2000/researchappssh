@@ -250,7 +250,7 @@ pm2 start ecosystem.config.js
 
 Add to `/etc/nginx/nginx.conf`:
 
-```nginx
+\`\`\`nginx
 worker_processes auto;
 worker_connections 1024;
 
